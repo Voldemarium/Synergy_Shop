@@ -1,3 +1,5 @@
+import common.AppView;
+import common.PageLoop;
 import data.data_sources.cart.CartDataSource;
 import data.data_sources.cart.MockCartDataSourceImpl;
 import data.data_sources.catalog.CatalogDataSource;
@@ -5,6 +7,9 @@ import data.data_sources.catalog.MockCatalogDataSourceImpl;
 import data.data_sources.order.MockOrderDataSourceImpl;
 import data.data_sources.order.OrderDataSource;
 import data.service.ShopService;
+import view.*;
+
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,13 +18,29 @@ public class Main {
         OrderDataSource orderDataSource = new MockOrderDataSourceImpl();
 
         ShopService shopService = new ShopService(catalogDataSource, cartDataSource, orderDataSource);
-        System.out.println(shopService.getCatalog());
-        System.out.println(shopService.getCart());
-        System.out.println(shopService.addToCart("id1", 5));
-        System.out.println(shopService.addToCart("id5", 5));
-        System.out.println(shopService.getCart());
 
+        AppView addToCartView = new AddToCartView(shopService);
 
+        ArrayList<AppView> catalogChildren = new ArrayList<>();
+        catalogChildren.add(addToCartView);
+        AppView catalogView = new CatalogView(shopService, catalogChildren);
+
+        AppView cartView = new CartView(shopService);
+        AppView orderView = new OrderView(shopService);
+
+        ArrayList<AppView> mainChildren = new ArrayList<>();
+        mainChildren.add(catalogView);
+        mainChildren.add(cartView);
+        mainChildren.add(orderView);
+        AppView mainView = new MainView(mainChildren);
+
+        new PageLoop(mainView).run();  // запуск главной страницы
+
+//        System.out.println(shopService.getCatalog());
+//        System.out.println(shopService.getCart());
+//        System.out.println(shopService.addToCart("id1", 5));
+//        System.out.println(shopService.addToCart("id5", 5));
+//        System.out.println(shopService.getCart());
 
     }
 }

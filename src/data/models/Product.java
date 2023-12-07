@@ -21,7 +21,7 @@ public class Product {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
 //                ", description='" + description + '\'' +
-//                ", price=" + price +
+                ", price=" + price +
 //                ", available=" + available +
                 '}';
     }
