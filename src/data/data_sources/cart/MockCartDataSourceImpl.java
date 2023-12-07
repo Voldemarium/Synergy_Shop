@@ -9,12 +9,12 @@ public class MockCartDataSourceImpl extends CartDataSource {
     private ArrayList<CartItem> cart = new ArrayList<>();
 
     @Override
-    void addToCart(Product product, int count) {
+    public void addToCart(Product product, int count) {
         cart.add(new CartItem(product, count));
     }
 
     @Override
-    ArrayList<CartItem> getCart() {
+    public ArrayList<CartItem> getCart() {
         return cart;
     }
 }

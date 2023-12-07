@@ -6,8 +6,9 @@ import data.models.Product;
 import java.util.ArrayList;
 
 public abstract class CartDataSource {
-    abstract void addToCart(Product product, int count);
-    abstract ArrayList<CartItem> getCart();
+    public abstract void addToCart(Product product, int count);
+
+    public abstract ArrayList<CartItem> getCart();
 }
 
 /* Фичи:

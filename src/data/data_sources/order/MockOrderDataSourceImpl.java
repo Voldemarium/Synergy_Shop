@@ -5,12 +5,12 @@ import data.models.Order;
 public class MockOrderDataSourceImpl extends OrderDataSource{
     private Order order;
     @Override
-    void createOrder(Order order) {
+    public void createOrder(Order order) {
         this.order = order;
     }
 
     @Override
-    Order getOrder() {
+    public Order getOrder() {
         return this.order;
     }
 }
