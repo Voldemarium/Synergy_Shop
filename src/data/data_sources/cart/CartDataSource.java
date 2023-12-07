@@ -7,8 +7,10 @@ import java.util.ArrayList;
 
 public abstract class CartDataSource {
     public abstract void addToCart(Product product, int count);
+    public abstract void removeToCart(Product product);
 
     public abstract ArrayList<CartItem> getCart();
+
 }
 
 /* Фичи:

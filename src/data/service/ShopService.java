@@ -26,11 +26,21 @@ public class ShopService {
     }
 
     public boolean addToCart(String productId, int count) {
-
         ArrayList<Product> products = getCatalog();
         for (Product product : products) {
             if (product.id.equals(productId)) {
                 cartDataSource.addToCart(product, count);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeToCart(String productId) {
+        ArrayList<CartItem> cart = getCart();
+        for (CartItem cartItem : cart) {
+            if (cartItem.product.id.equals(productId)) {
+                cartDataSource.removeToCart(cartItem.product);
                 return true;
             }
         }

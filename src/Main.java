@@ -20,18 +20,21 @@ public class Main {
         ShopService shopService = new ShopService(catalogDataSource, cartDataSource, orderDataSource);
 
         AppView addToCartView = new AddToCartView(shopService);
+        AppView removeToCartView = new RemoveToCartView(shopService);
 
         ArrayList<AppView> catalogChildren = new ArrayList<>();
         catalogChildren.add(addToCartView);
         AppView catalogView = new CatalogView(shopService, catalogChildren);
 
-        AppView cartView = new CartView(shopService);
+        ArrayList<AppView> cartChildren = new ArrayList<>();
+        cartChildren.add(removeToCartView);
+        AppView cartView = new CartView(shopService, cartChildren);
         AppView orderView = new OrderView(shopService);
 
         ArrayList<AppView> mainChildren = new ArrayList<>();
         mainChildren.add(catalogView);
         mainChildren.add(cartView);
-        mainChildren.add(orderView);
+        mainChildren.add(catalogView);
         AppView mainView = new MainView(mainChildren);
 
         new PageLoop(mainView).run();  // запуск главной страницы

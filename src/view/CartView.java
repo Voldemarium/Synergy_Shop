@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class CartView extends AppView {
     final ShopService shopService;
 
-    public CartView(ShopService shopService) {
-        super("Cart", new ArrayList<>());
+    public CartView(ShopService shopService, ArrayList<AppView> children) {
+        super("Cart", children);
         this.shopService = shopService;
     }
 
