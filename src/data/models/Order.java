@@ -19,4 +19,16 @@ public class Order {
         this.deliveryTime = deliveryTime;
         this.cart = cart;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", paymentType='" + paymentType + '\'' +
+                ", deliveryTime='" + deliveryTime + '\'' +
+                ", cart=" + cart +
+                '}';
+    }
 }

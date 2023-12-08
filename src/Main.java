@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
+
         CatalogDataSource catalogDataSource = new MockCatalogDataSourceImpl();
         CartDataSource cartDataSource = new MockCartDataSourceImpl();
         OrderDataSource orderDataSource = new MockOrderDataSourceImpl();
@@ -24,27 +25,24 @@ public class Main {
         catalogChildren.add(addToCartView);
         AppView catalogView = new CatalogView(shopService, catalogChildren);
 
+
         AppView removeToCartView = new RemoveProductFromCartView(shopService);
         AppView cartCleanView = new CartCleanView(shopService);
+        AppView createOrderView = new CreateOrderView(shopService);
         ArrayList<AppView> cartChildren = new ArrayList<>();
         cartChildren.add(removeToCartView);
         cartChildren.add(cartCleanView);
+        cartChildren.add(createOrderView);
         AppView cartView = new CartView(shopService, cartChildren);
-//        AppView orderView = new OrderView(shopService);
+
+        AppView orderView = new OrderView(shopService);
 
         ArrayList<AppView> mainChildren = new ArrayList<>();
         mainChildren.add(catalogView);
         mainChildren.add(cartView);
-        mainChildren.add(catalogView);
+        mainChildren.add(orderView);
         AppView mainView = new MainView(mainChildren);
 
         new PageLoop(mainView).run();  // запуск главной страницы
-
-//        System.out.println(shopService.getCatalog());
-//        System.out.println(shopService.getCart());
-//        System.out.println(shopService.addToCart("id1", 5));
-//        System.out.println(shopService.addToCart("id5", 5));
-//        System.out.println(shopService.getCart());
-
     }
 }

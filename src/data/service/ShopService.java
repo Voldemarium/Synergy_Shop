@@ -63,5 +63,16 @@ public class ShopService {
         ArrayList<CartItem> cart = getCart();
         Order newOrder = new Order(name, phone, address, paymentType, deliveryTime, cart);
         orderDataSource.createOrder(newOrder);
-    };
+        if (orderDataSource.getOrder() != null) {
+            System.out.println("Order created");
+            cartDataSource.cartClean();
+            if (cartDataSource.getCart().isEmpty()) {
+                System.out.println("Shopping cart cleaned");
+            }
+        }
+    }
+
+    public Order getOrder() {
+        return orderDataSource.getOrder();
+    }
 }
