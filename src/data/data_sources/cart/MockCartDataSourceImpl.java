@@ -15,7 +15,7 @@ public class MockCartDataSourceImpl extends CartDataSource {
     }
 
     @Override
-    public void removeToCart(Product product) {
+    public void removeProductFromCart(Product product) {
         ListIterator<CartItem> iterator = cart.listIterator();
         while (iterator.hasNext()) {
             CartItem cartItem = iterator.next();
@@ -23,6 +23,11 @@ public class MockCartDataSourceImpl extends CartDataSource {
                 iterator.remove();
             }
         }
+    }
+
+    @Override
+    public void cartClean() {
+        cart.clear();
     }
 
     @Override

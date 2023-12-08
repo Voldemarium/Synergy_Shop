@@ -7,7 +7,6 @@ import data.models.CartItem;
 import data.models.Order;
 import data.models.Product;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ShopService {
@@ -36,14 +35,23 @@ public class ShopService {
         return false;
     }
 
-    public boolean removeToCart(String productId) {
+    public boolean removeProductFromCart(String productId) {
         ArrayList<CartItem> cart = getCart();
         for (CartItem cartItem : cart) {
             if (cartItem.product.id.equals(productId)) {
-                cartDataSource.removeToCart(cartItem.product);
+                cartDataSource.removeProductFromCart(cartItem.product);
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean cartClean() {
+        ArrayList<CartItem> cart = getCart();
+            if (!cart.isEmpty()) {
+                cartDataSource.cartClean();
+                return true;
+            }
         return false;
     }
 

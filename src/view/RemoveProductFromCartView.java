@@ -6,10 +6,10 @@ import data.service.ShopService;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class RemoveToCartView extends AppView {
+public class RemoveProductFromCartView extends AppView {
     final ShopService shopService;
 
-    public RemoveToCartView(ShopService shopService) {
+    public RemoveProductFromCartView(ShopService shopService) {
         super("remove product from cart", new ArrayList<>());
         this.shopService = shopService;
     }
@@ -22,7 +22,7 @@ public class RemoveToCartView extends AppView {
         if (productId == null) {
             return;
         }
-        final boolean res = shopService.removeToCart(productId);
+        final boolean res = shopService.removeProductFromCart(productId);
         if (res) {
             System.out.println("Product removed");
         } else {

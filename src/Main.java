@@ -20,16 +20,17 @@ public class Main {
         ShopService shopService = new ShopService(catalogDataSource, cartDataSource, orderDataSource);
 
         AppView addToCartView = new AddToCartView(shopService);
-        AppView removeToCartView = new RemoveToCartView(shopService);
-
         ArrayList<AppView> catalogChildren = new ArrayList<>();
         catalogChildren.add(addToCartView);
         AppView catalogView = new CatalogView(shopService, catalogChildren);
 
+        AppView removeToCartView = new RemoveProductFromCartView(shopService);
+        AppView cartCleanView = new CartCleanView(shopService);
         ArrayList<AppView> cartChildren = new ArrayList<>();
         cartChildren.add(removeToCartView);
+        cartChildren.add(cartCleanView);
         AppView cartView = new CartView(shopService, cartChildren);
-        AppView orderView = new OrderView(shopService);
+//        AppView orderView = new OrderView(shopService);
 
         ArrayList<AppView> mainChildren = new ArrayList<>();
         mainChildren.add(catalogView);
