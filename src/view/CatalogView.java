@@ -1,6 +1,7 @@
 package view;
 
 import common.AppView;
+import data.comparators.PriceComparator;
 import data.models.Product;
 import data.service.ShopService;
 
@@ -15,7 +16,8 @@ public class CatalogView extends AppView {
 
     @Override
     public void action() {
-        ArrayList<Product> catalog = shopService.getCatalog();
+         PriceComparator priceComparator = new PriceComparator(false);
+        ArrayList<Product> catalog = shopService.getCatalog(0, 10, priceComparator);
         if (!catalog.isEmpty()) {
             for (Product product : catalog) {
                 System.out.println(product);

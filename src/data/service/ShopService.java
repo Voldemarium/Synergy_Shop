@@ -8,6 +8,7 @@ import data.models.Order;
 import data.models.Product;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class ShopService {
     final CatalogDataSource catalogDataSource;
@@ -20,17 +21,19 @@ public class ShopService {
         this.orderDataSource = orderDataSource;
     }
 
-    public ArrayList<Product> getCatalog() {
-        return catalogDataSource.getCatalog();
+    public ArrayList<Product> getCatalog(int page, int limit) {
+        return catalogDataSource.getCatalog(page, limit);
+    }
+
+    public ArrayList<Product> getCatalog(int page, int limit, Comparator<Product> comparator) {
+        return catalogDataSource.getCatalog(page, limit, comparator);
     }
 
     public boolean addToCart(String productId, int count) {
-        ArrayList<Product> products = getCatalog();
-        for (Product product : products) {
-            if (product.id.equals(productId)) {
-                cartDataSource.addToCart(product, count);
-                return true;
-            }
+        Product product = catalogDataSource.getProductById(productId);
+        if (product != null) {
+            cartDataSource.addToCart(product, count);
+            return true;
         }
         return false;
     }
@@ -48,10 +51,10 @@ public class ShopService {
 
     public boolean cartClean() {
         ArrayList<CartItem> cart = getCart();
-            if (!cart.isEmpty()) {
-                cartDataSource.cartClean();
-                return true;
-            }
+        if (!cart.isEmpty()) {
+            cartDataSource.cartClean();
+            return true;
+        }
         return false;
     }
 
