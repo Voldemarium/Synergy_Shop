@@ -17,8 +17,9 @@ public class CatalogView extends AppView {
     @Override
     public void action() {
          PriceComparator priceComparator = new PriceComparator(false);
-        ArrayList<Product> catalog = shopService.getCatalog(0, 10, priceComparator);
+        ArrayList<Product> catalog = shopService.getCatalog(nowPage, pageLimit, priceComparator);
         if (!catalog.isEmpty()) {
+            hasNextPage = catalog.size() == pageLimit;
             for (Product product : catalog) {
                 System.out.println(product);
             }
