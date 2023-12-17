@@ -1,11 +1,14 @@
 import common.AppView;
 import common.PageLoop;
+import data.comparators.AppComparator;
+import data.comparators.PriceComparator;
 import data.data_sources.cart.CartDataSource;
 import data.data_sources.cart.MockCartDataSourceImpl;
 import data.data_sources.catalog.CatalogDataSource;
 import data.data_sources.catalog.MockCatalogDataSourceImpl;
 import data.data_sources.order.MockOrderDataSourceImpl;
 import data.data_sources.order.OrderDataSource;
+import data.models.Product;
 import data.service.ShopService;
 import view.*;
 
@@ -23,8 +26,10 @@ public class Main {
         AppView addToCartView = new AddToCartView(shopService);
         ArrayList<AppView> catalogChildren = new ArrayList<>();
         catalogChildren.add(addToCartView);
-        AppView catalogView = new CatalogView(shopService, catalogChildren);
-
+        ArrayList<AppComparator<Product>> catalogComparators = new ArrayList<>();
+        catalogComparators.add(new AppComparator<>(new PriceComparator(),"ascending price"));
+        catalogComparators.add(new AppComparator<>(new PriceComparator(false),"descending price"));
+        AppView catalogView = new CatalogView(shopService, catalogChildren, catalogComparators);
 
         AppView removeToCartView = new RemoveProductFromCartView(shopService);
         AppView cartCleanView = new CartCleanView(shopService);

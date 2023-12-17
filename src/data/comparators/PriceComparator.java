@@ -5,7 +5,10 @@ import data.models.Product;
 import java.util.Comparator;
 
 public class PriceComparator implements Comparator<Product> {
-    public boolean isAsc = true; // сортировка по возрастанию
+    public boolean isAsc = true; //  sort ascending (сортировка по возрастанию)
+
+    public PriceComparator() {
+    }
 
     public PriceComparator(boolean isAsc) {
         this.isAsc = isAsc;
